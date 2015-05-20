@@ -6,6 +6,8 @@ ImdbKnockoff::App.controllers :movies do
   end
 
   get :show, map: '/movies/:id' do
-    "TODO!"
+    @movie = Movie.find(params[:id])
+
+    render :show
   end
 end
