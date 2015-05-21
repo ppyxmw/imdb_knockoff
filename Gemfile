@@ -18,15 +18,20 @@ gem 'erubis', '~> 2.7.0'
 gem 'activerecord', '>= 3.1', :require => 'active_record'
 gem 'pg'
 
-# Test requirements
-gem 'minitest', :require => 'minitest/autorun', :group => 'test'
-gem 'rack-test', :require => 'rack/test', :group => 'test'
 
 # Padrino Stable Gem
 gem 'padrino', '0.12.5'
 
-gem 'pry'
-gem 'database_cleaner'
+
+group :development, :test do
+  gem 'pry'
+  gem 'database_cleaner'
+
+  # Test requirements
+  gem 'minitest', :require => 'minitest/autorun', :group => 'test'
+  gem 'rack-test', :require => 'rack/test', :group => 'test'
+
+end
 
 # Or Padrino Edge
 # gem 'padrino', :github => 'padrino/padrino-framework'

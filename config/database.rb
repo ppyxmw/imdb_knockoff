@@ -19,10 +19,14 @@ ActiveRecord::Base.configurations[:development] = {
   :host => 'localhost'
 }
 
+postgres = URI.parse(ENV.fetch('DATABASE_URL', ''))
 ActiveRecord::Base.configurations[:production] = {
   :adapter => 'postgresql',
-  :database => 'imdb_knockoff_production'
-
+  :encoding => 'utf8',
+  :database => postgres.path[1..-1],
+  :username => postgres.user,
+  :password => postgres.password,
+  :host => postgres.host
 }
 
 ActiveRecord::Base.configurations[:test] = {
