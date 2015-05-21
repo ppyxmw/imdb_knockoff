@@ -1,6 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../test_config.rb')
 
-
 describe "GET /movies" do
   it "responds OK" do
 
@@ -26,14 +25,24 @@ describe "GET /movies" do
 end
 
 
-
 describe "GET /movies/new" do
-  it "responds OK" do
-    get "/movies/new"
+  describe "with  invalid credentials" do
+    it "redirects to  the login page" do
+      get "/movies/new"
 
-    assert last_response.ok?
+      assert last_response.redirect?, "Didn't redirect"
+    end
+  end
+
+  describe "with valid credentials" do
+    it "responds OK" do
+      get "/movies/new", {}, { 'rack.session' => {authenticated: true} }
+
+      assert last_response.ok?
+    end
   end
 end
+
 
 describe "GET /movies/:id" do
   before do
@@ -50,20 +59,42 @@ describe "GET /movies/:id" do
   end
 end
 
+
 describe "POST /movies" do
-  before do
-    post "/movies", { name: "Jaws", rating: 5 }
+
+  def create_movie(authenticated:)
+    args = if authenticated
+            { 'rack.session' => {authenticated: true }}
+          else
+            {}
+          end
+    post "/movies", {name: "Jaws", rating: 5}, args
+  end
+
+  describe "when unauthenticated" do
+    it "redirects to the login page" do
+      create_movie(authenticated: false)
+
+      assert last_response.redirect?, "Not redirected"
+      assert_includes last_response.location,  "/session/new"
+    end
   end
 
 
-  it "creates a movie" do
-    jaws = Movie.first
+  describe "when authenticated" do
+    before do
+      create_movie(authenticated: true)
+    end
 
-    assert_equal jaws.name, "Jaws"
-    assert_equal jaws.rating, 5
-  end
+    it "creates a movie" do
+      jaws = Movie.first
 
-  it "redirects to our new movie" do
-    assert last_response.redirect?
+      assert_equal jaws.name, "Jaws"
+      assert_equal jaws.rating, 5
+    end
+
+    it "redirects to our new movie" do
+      assert last_response.redirect?
+    end
   end
 end

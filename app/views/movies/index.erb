@@ -1,7 +1,11 @@
-<% @movies.each do |movie|   %>
-<h1><%= movie.name %></h1>
+<h1>All the movies are here:</h1>
 
-<% end %>
+<h3>
+  <ol>
+    <% @movies.each do |movie|   %>
+      <li> <%= movie.name %>: <%= movie.rating %></li>
+    <% end %>
+  </ol>
+</h3>
 
-<p>http://localhost:3000/movies/new</p>
-
+<a href="http://localhost:3000/movies/new">Add a new movie</a>
