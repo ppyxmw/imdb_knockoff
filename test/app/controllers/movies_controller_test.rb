@@ -68,7 +68,7 @@ describe "POST /movies" do
           else
             {}
           end
-    post "/movies", {name: "Jaws", rating: 5}, args
+    post "/movies", {movie: {name: "Jaws", rating: 5}}, args
   end
 
   describe "when unauthenticated" do
