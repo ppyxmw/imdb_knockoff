@@ -5,7 +5,7 @@ ImdbKnockoff::App.controllers :session do
 
   post :create, map: '/session' do
     #NOTE: This is not secure!
-    if params[:username] == "ben" && params[:password] == "p@55word"
+    if params[:username] == "aaa" && params[:password] == "aaa"
       session[:authenticated] = true
       redirect url(:movies, :new)
     else

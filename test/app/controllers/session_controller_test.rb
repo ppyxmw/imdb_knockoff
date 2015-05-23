@@ -17,13 +17,13 @@ describe "POST /session/new" do
 describe "POST /session" do
   describe "with valid credentials" do
     it "creates a new session" do
-      post "/session", {username: 'ben', password: 'p@55word'}
+      post "/session", {username: 'aaa', password: 'aaa'}
 
       assert session[:authenticated], "Not authenticated"
     end
 
     it "redirects to the new movie action" do
-      post "/session", {username: 'ben', password: 'p@55word'}
+      post "/session", {username: 'aaa', password: 'aaa'}
 
       assert last_response.redirect?, "Didn't redirect"
     end

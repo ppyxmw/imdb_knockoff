@@ -98,3 +98,26 @@ describe "POST /movies" do
     end
   end
 end
+
+describe "GET /movies/:id/edit" do
+  it "shows a selected movie's params" do
+    skip
+
+  @dogs_movie = Movie.create!(name: 'The ODB', rating: 3)
+
+
+  get "/movies/dogs_movie.id/edit"
+  assert_includes last_response.body, dogs_movie.name
+
+  end
+end
+
+
+
+
+
+
+
+
+
+
