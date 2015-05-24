@@ -38,4 +38,10 @@ ImdbKnockoff::App.controllers :movies do
     @movie.update(params[:movie])
     redirect url(:movies, :index)
   end
+
+  get :delete, map: 'movies/:id/delete' do
+    @movie = Movie.find(params[:id])
+    @movie.delete
+    redirect url(:movies, :index)
+  end
 end

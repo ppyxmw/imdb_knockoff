@@ -3,7 +3,10 @@
 <h3>
   <ol>
     <% @movies.each do |movie|   %>
-      <li><a href="http://localhost:3000/movies/<%= "#{movie.id}" %>/edit"> <%= movie.name %></a></li>
+      <li>
+       <a href="http://localhost:3000/movies/<%= "#{movie.id}" %>/edit"><%= movie.name %></a>
+       <a href="http://localhost:3000/movies/<%= "#{movie.id}" %>/delete">x</a>
+      </li>
     <% end %>
   </ol>
 </h3>
