@@ -116,6 +116,24 @@ describe "GET /movies/:id/edit" do
   end
 end
 
+describe "GET /movies/:id/delete" do
+  before do
+    @movie = Movie.create!(name: 'The ODB', rating: 3)
+    @movie2 = Movie.create!(name: 'The Job', rating: 2)
+  end
+
+  it "check movie added" do
+    get "/movies"
+    assert_includes last_response.body, @movie.name
+  end
+
+  it "deletes a movie" do
+    get "/movies/#{@movie.id}/delete"
+    refute_includes last_response.body, @movie.name
+  end
+end
+
+
 # describe "POST /movies/:id" do
 #   before do
 #     @movie = Movie.create!(name: 'The ODB', rating: 3)
