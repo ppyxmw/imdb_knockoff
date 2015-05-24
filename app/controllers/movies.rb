@@ -23,25 +23,13 @@ ImdbKnockoff::App.controllers :movies do
     end
   end
 
-
   get :show, map: '/movies/:id' do
     @movie = Movie.find(params[:id])
     render :show
   end
 
-  get :logout, map: '/movies/logout' do
-    session[:authenticated] = false
-    redirect url(:movies, :index)
+  get :edit, map: 'movies/:id/edit' do
+    @movie = Movie.find(params[:id])
+    render :edit
   end
-
-
-
-
-
-  # get :edit, map: '/movies/:id/edit' do
-  #   @movie = Movie.find(params[:id])
-  #   render :show
-  # end
-
-
 end

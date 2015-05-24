@@ -1,17 +1,13 @@
-<h1>Add a new movie:</h1>
+<h1>Edit movie:</h1>
+
 
 <% form_for @movie, url_for(:movies, :create) do |f| %>
- <% if @movie.errors.present? %>
-    <h2> Whoops </h2>
-    <ul>
-     <% @movie.errors.full_messages.each do |error| %>
-      <li><%= error %></li>
-    <%end%>
-  </ul>
- <% end %>
+
  <%= f.text_field_block(:name) %>
  <%= f.select_block(:rating, options: (1..5)) %>
- <%= f.submit_block "submit"%>
+
+ <%= f.submit_block "Update"%>
+
 <% end %>
 
 <form action="http://localhost:3000/movies">

@@ -3,11 +3,11 @@
 <h3>
   <ol>
     <% @movies.each do |movie|   %>
-      <li> <%= movie.name %>: <%= movie.rating %></li>
+      <li><a href="http://localhost:3000/movies/<%= "#{movie.id}" %>/edit"> <%= movie.name %></a></li>
+
     <% end %>
   </ol>
 </h3>
-
 
 <form action="http://localhost:3000/movies/new">
     <input type="submit" value="Add movie">
