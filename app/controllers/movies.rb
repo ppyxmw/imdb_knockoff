@@ -4,7 +4,7 @@ ImdbKnockoff::App.controllers :movies do
   end
 
   get :index do
-  @movies = Movie.all
+  @movies = Movie.order(:id)
   render :index
   end
 
@@ -31,5 +31,11 @@ ImdbKnockoff::App.controllers :movies do
   get :edit, map: 'movies/:id/edit' do
     @movie = Movie.find(params[:id])
     render :edit
+  end
+
+  post :update, map: '/movies/:id' do
+    @movie = Movie.find(params[:id])
+    @movie.update(params[:movie])
+    redirect url(:movies, :index)
   end
 end

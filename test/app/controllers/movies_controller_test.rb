@@ -100,15 +100,30 @@ describe "POST /movies" do
 end
 
 describe "GET /movies/:id/edit" do
-  it "shows a selected movie's params" do
-
-  @movie = Movie.create!(name: 'The ODB', rating: 3)
-  get "/movies/#{@movie.id}/edit"
-
-  assert_includes last_response.body, @movie.name
+  before do
+    @movie = Movie.create!(name: 'The ODB', rating: 3)
+    get "/movies/#{@movie.id}/edit"
   end
 
+  it "shows a selected movie's params" do
+    assert_includes last_response.body, @movie.name
+    assert_includes last_response.body, @movie.rating.to_s
+  end
 
-
+  it "it renders the edit page" do
+    assert last_response.ok?
+    assert_includes last_response.body, "update"
+  end
 end
 
+# describe "POST /movies/:id" do
+#   before do
+#     @movie = Movie.create!(name: 'The ODB', rating: 3)
+#   end
+#   it "updates a movies params" do
+
+#     name: = "checkit"
+#     post "movies/#{@movie.id}"
+#     assert_includes last_response.body, "checkit"
+#   end
+# end

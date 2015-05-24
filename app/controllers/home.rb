@@ -15,9 +15,5 @@ ImdbKnockoff::App.controllers :home do
     session[:authenticated] = false
     redirect url(:home, :index)
   end
-
-
-
-
 end
 

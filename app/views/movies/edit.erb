@@ -1,13 +1,10 @@
 <h1>Edit movie:</h1>
 
-
-<% form_for @movie, url_for(:movies, :create) do |f| %>
+<% form_for(@movie, url_for(:movies, :update, id: @movie.id)) do |f| %>
 
  <%= f.text_field_block(:name) %>
  <%= f.select_block(:rating, options: (1..5)) %>
-
- <%= f.submit_block "Update"%>
-
+ <%= f.submit_block "update"%>
 <% end %>
 
 <form action="http://localhost:3000/movies">
