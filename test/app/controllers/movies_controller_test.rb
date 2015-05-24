@@ -24,7 +24,6 @@ describe "GET /movies" do
   end
 end
 
-
 describe "GET /movies/new" do
   describe "with  invalid credentials" do
     it "redirects to  the login page" do
@@ -43,7 +42,6 @@ describe "GET /movies/new" do
   end
 end
 
-
 describe "GET /movies/:id" do
   before do
     @movie = Movie.create!(name: 'Jaws', rating: 5)
@@ -59,15 +57,14 @@ describe "GET /movies/:id" do
   end
 end
 
-
 describe "POST /movies" do
 
   def create_movie(authenticated:)
     args = if authenticated
-            { 'rack.session' => {authenticated: true }}
-          else
-            {}
-          end
+      { 'rack.session' => {authenticated: true }}
+    else
+      {}
+    end
     post "/movies", {movie: {name: "Jaws", rating: 5}}, args
   end
 
@@ -132,16 +129,3 @@ describe "GET /movies/:id/delete" do
     refute_includes last_response.body, @movie.name
   end
 end
-
-
-# describe "POST /movies/:id" do
-#   before do
-#     @movie = Movie.create!(name: 'The ODB', rating: 3)
-#   end
-#   it "updates a movies params" do
-
-#     name: = "checkit"
-#     post "movies/#{@movie.id}"
-#     assert_includes last_response.body, "checkit"
-#   end
-# end
